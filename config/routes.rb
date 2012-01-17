@@ -1,4 +1,4 @@
-CrowdSurf::Application.routes.draw do
+Temp::Application.routes.draw do
   resources :raw_videos
   
   # The priority is based upon order of creation:
