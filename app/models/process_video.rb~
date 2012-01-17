@@ -1,0 +1,9 @@
+class ProcessVideo < ActiveRecord::Base
+  belongs_to :event
+
+  def assign_to event
+    self << event
+    self.save
+  end
+  
+end

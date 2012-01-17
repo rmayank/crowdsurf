@@ -1,0 +1,33 @@
+<h1>Listing raw_videos</h1>
+
+<table>
+  <tr>
+    <th>Start time</th>
+    <th>End time</th>
+    <th>Latitude</th>
+    <th>Longitude</th>
+    <th>Video link</th>
+    <th>State</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @raw_videos.each do |raw_video| %>
+  <tr>
+    <td><%= raw_video.start_time %></td>
+    <td><%= raw_video.end_time %></td>
+    <td><%= raw_video.latitude %></td>
+    <td><%= raw_video.longitude %></td>
+    <td><%= raw_video.video_link %></td>
+    <td><%= raw_video.state %></td>
+    <td><%= link_to 'Show', raw_video %></td>
+    <td><%= link_to 'Edit', edit_raw_video_path(raw_video) %></td>
+    <td><%= link_to 'Destroy', raw_video, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Raw video', new_raw_video_path %>

@@ -1,0 +1,12 @@
+class LatLongProcessVideo < ActiveRecord::Migration
+  def self.up
+    remove_column :process_videos, :latitude
+    remove_column :process_videos, :longitude
+    add_column :process_videos, :latitude, :decimal, :precision => 15, :scale => 12
+    add_column :process_videos, :longitude, :decimal, :precision => 15, :scale => 12
+    add_column :process_videos, :state, :string
+  end
+
+  def self.down
+  end
+end

@@ -1,0 +1,42 @@
+<%= javascript_include_tag :defaults %>
+<%= form_for(@raw_video) do |f| %>
+  <% if @raw_video.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@raw_video.errors.count, "error") %> prohibited this raw_video from being saved:</h2>
+
+      <ul>
+      <% @raw_video.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :start_time %><br />
+    <%= f.datetime_select :start_time %>
+  </div>
+  <div class="field">
+    <%= f.label :end_time %><br />
+    <%= f.datetime_select :end_time %>
+  </div>
+  <div class="field">
+    <%= f.label :latitude %><br />
+    <%= f.text_field :latitude%>
+  </div>
+  <div class="field">
+    <%= f.label :longitude %><br />
+    <%= f.text_field :longitude %>
+  </div>
+  <div class="field">
+    <%= f.label :video_link %><br />
+    <%= f.text_area :video_link, :class => :mceEditor %>
+  </div>
+  <div class="field">
+    <%= f.label :state %><br />
+    <%= f.text_field :state %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Start time:</b>
+  <%= @raw_video.start_time %>
+</p>
+
+<p>
+  <b>End time:</b>
+  <%= @raw_video.end_time %>
+</p>
+
+<p>
+  <b>Latitude:</b>
+  <%= @raw_video.latitude %>
+</p>
+
+<p>
+  <b>Longitude:</b>
+  <%= @raw_video.longitude %>
+</p>
+
+<p>
+  <b>Video link:</b>
+  <%= raw @raw_video.video_link %>
+</p>
+
+<p>
+  <b>State:</b>
+  <%= @raw_video.state %>
+</p>
+
+
+<%= link_to 'Edit', edit_raw_video_path(@raw_video) %> |
+<%= link_to 'Back', raw_videos_path %>

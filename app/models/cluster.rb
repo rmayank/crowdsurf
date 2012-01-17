@@ -1,0 +1,47 @@
+class Cluster
+
+  TIME_DIFFERENCE = 30 # in minutes
+  RADIUS_DISTANCE = 1 # in miles
+
+  def initialize
+    @event_videos = []
+  end
+  
+  def self.cluster(video, start_time = video.start_time, end_time = video.end_time)
+    cluster_by_geo_locations(video, cluster_by_time(start_time, end_time))
+  end
+  
+  def self.cluster_by_time(start_time, end_time, time_difference = TIME_DIFFERENCE)
+    return RawVideo.raw.between_time(start_time-time_difference.minutes, end_time+time_difference.minutes)
+  end
+  
+  def self.find_event_by_time(start_time, end_time, time_difference = TIME_DIFFERENCE)
+    return Event.between_time(start_time-time_difference.minutes, end_time+time_difference.minutes)
+  end
+
+  def self.cluster_by_geo_locations(base_video, cluster_time_based)
+    return [] if cluster_time_based.blank? # I dont think this will true at any case
+    return cluster_time_based.select {|time_based_video|  base_video.is_related_video?(time_based_video.longitude, time_based_video.latitude) }
+  end
+
+  def self.set_in_processed_state(videos)
+    videos.each{ |video| video.processing! }
+  end
+  
+  def self.set_flagged_state(videos)
+    videos.each{ |video| video.flag! }
+  end
+
+  def self.set_processed_state(videos)
+    videos.each{ |video| video.processed! }
+  end
+
+  def self.min_start_time(cluster_location_based)
+    cluster_location_based.map(&:start_time).min
+  end
+
+  def self.max_end_time(cluster_location_based)
+    cluster_location_based.map(&:end_time).max
+  end
+
+end
