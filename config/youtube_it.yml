@@ -1,0 +1,10 @@
+common: &common
+  dev_key: AI39si4tL1lCRmECcWsR_xPgVsXXN8ROKI_BOVO3XUyoMQbTqFtdo2S29qDcjbkYc5Prqx7u2c_KU8VXcjPXv9mnwqc40GFwOQ
+  username: dchouhan41
+  password: st$l2010
+test:
+  <<: *common
+development:
+  <<: *common
+production:
+  <<: *common
