@@ -2,12 +2,16 @@ class RawVideosController < ApplicationController
   # GET /raw_videos
   # GET /raw_videos.xml
   def index
-    #Cron.cluster
     @raw_videos = RawVideo.all
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @raw_videos }
     end
+  end
+  
+  def call_cluster
+    Cron.cluster
+    render :text=>"true"
   end
 
   # GET /raw_videos/1

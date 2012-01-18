@@ -10,6 +10,9 @@ gem 'pg'
 gem 'aasm'
 gem 'geokit'
 gem 'youtube_it'
+gem 'inherited_resources'
+gem 'acts_as_commentable'
+gem 'multipart-post'
 
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -31,5 +34,6 @@ gem 'youtube_it'
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
  group :development, :test do
+   gem 'web-app-theme', '>= 0.6.2'
    gem 'ruby-debug19'
  end

@@ -1,0 +1,6 @@
+ <%= form_for @video, :url => test_videos_path, :html => { :class => :form } do |f| -%>
+        <%= label_tag :file %>
+        <%= file_field_tag :file %>
+        <%= text_field_tag :title%>
+        <%= submit_tag "Upload video" %>
+ <% end -%>

@@ -1,6 +1,26 @@
 Temp::Application.routes.draw do
-  resources :raw_videos
+  resources :raw_videos do
+    collection do
+      get 'call_cluster'
+    end
+  end
   resources :you_tubes, :only => [:index, :create]
+  resources :videos do
+    collection do
+      post :test
+      get :test_new
+    end
+    member do
+      post :add_comment
+    end     
+    new do
+       post :upload
+       get  :save_video
+     end
+  end
+
+  match "videos/:id/add_comment", :to => "videos#add_comment"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -50,7 +70,7 @@ Temp::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => "you_tubes#index"
+  root :to => "videos#index"
 
   # See how all your routes lay out with "rake routes"
 
