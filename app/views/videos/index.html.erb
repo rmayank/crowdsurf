@@ -1,8 +1,6 @@
 <div class="block">
   <div class="secondary-navigation">
     <ul class="wat-cf">
-      <li class="first active"><%= link_to "#{t("web-app-theme.list", :default => "List")}", videos_path  %></li>
-       <li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_video_path %></li>
     </ul>
   </div>          
   <div class="content">          
@@ -12,26 +10,37 @@
         <tr>             
           <th class="first">ID</th>
                     <th>
-            <%= t("activerecord.attributes.video.title", :default => t("activerecord.labels.title", :default => "Title")) %>
+            <%= "Event Name" %>
           </th>
                     <th><%= t("web-app-theme.created_at", :default => "Created at")  %></th>
           <th class="last">&nbsp;</th>
         </tr>
-        <% @videos.each do |video| -%>
+        <% @events.each do |event| -%>
         <tr class="<%= cycle("odd", "even") %>">
           <td>
-            <%= video.id %>
+            <%= event.id %>
+          </td>
+          <td>
+            <%= event.name %>
           </td>
                     <td>
-            <%= link_to video.title, video_path(video) %>
-          </td>
-                    <td>
-            <%= video.created_at %>
+            <%= event.created_at %>
           </td>
           <td class="last">
-            <%= link_to "#{t("web-app-theme.show", :default => "Show")}", video_path(video) %> |
-            <%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_video_path(video) %> |
-            <%= link_to "#{t("web-app-theme.delete", :default => "Delete")}", video_path(video), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4">
+            <div>
+            <% event.process_videos.each do |video| -%>
+               <div style="float:left;width:170px;">
+                 <span> <%= video.start_time.strftime("%I:%M%p") %> <%= video.end_time.strftime(" to %I:%M%p") %></span>
+                 <span>
+                 <%= raw yt_client.my_video(get_watch_id(video.video_link)).embed_html5(:width=>150,:height=>150) %>
+                 </span>
+               </div>
+            <% end %>
+            </div>
           </td>
         </tr>          
         <% end -%>
