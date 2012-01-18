@@ -24,7 +24,9 @@ class YouTubesController < ApplicationController
     res = Net::HTTP.start(url.host, url.port) do |http|
       http.request(req)
     end
-    redirect_to save_video_new_video_url(:video_id => @video.id)
+    @video.update_attributes(:yt_video_id => params[:id].to_s, :is_complete => true)
+    Video.delete_incomplete_videos
+    render :text=>res.body
   end
   
 end
