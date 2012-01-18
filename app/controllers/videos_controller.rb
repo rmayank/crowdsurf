@@ -20,11 +20,7 @@ class VideosController < InheritedResources::Base
     res = Net::HTTP.start(url.host, url.port) do |http|
       http.request(req)
     end
-
-    
     render :text=>res.body
-
-
   end
   
   def test_new
