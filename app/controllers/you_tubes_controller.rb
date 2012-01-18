@@ -16,8 +16,11 @@ class YouTubesController < ApplicationController
     base_url = @upload_info[:url]
     #ss = RestClient.post(base_url, :token=>@upload_info[:token], :file => File.new(Rails.root.to_s + "/public/jumps.mp4"), :content_type => 'video/mp4')
     puts params
+    
     url = URI.parse(base_url)
-    req = Net::HTTP::Post::Multipart.new base_url.gsub("http://uploads.gdata.youtube.com",""),"file" => params[:userfile], "token"=>@upload_info[:token]
+    video = params[:userfile].open
+    
+    req = Net::HTTP::Post::Multipart.new base_url.gsub("http://uploads.gdata.youtube.com",""),"file" => UploadIO.new(jpg, video.content_type, video.original_filename), "token"=>@upload_info[:token]
     res = Net::HTTP.start(url.host, url.port) do |http|
       http.request(req)
     end

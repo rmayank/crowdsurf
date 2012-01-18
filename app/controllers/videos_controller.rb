@@ -7,6 +7,7 @@ require 'net/http/post/multipart'
 class VideosController < InheritedResources::Base
 
   def test
+
     @video = Video.create(:title=>"description",:description=>"description",:is_complete=>false)
     @upload_info = Video.token_form({"title"=>"werwerwer", "description"=>"werwer"}, save_video_new_video_url(:video_id => @video.id))
     base_url = @upload_info[:url]
@@ -14,9 +15,8 @@ class VideosController < InheritedResources::Base
     
     
     url = URI.parse(base_url)
-    jpg = File.open(Rails.root.to_s + "/public/Movie.mp4")
-    
-    req = Net::HTTP::Post::Multipart.new base_url.gsub("http://uploads.gdata.youtube.com",""),"file" => UploadIO.new(jpg, "video/mp4", "Movie.mp4"), "token"=>@upload_info[:token]
+    jpg = params[:file].open
+    req = Net::HTTP::Post::Multipart.new base_url.gsub("http://uploads.gdata.youtube.com",""),"file" => UploadIO.new(jpg, params[:file].content_type, params[:file].original_filename), "token"=>@upload_info[:token]
     res = Net::HTTP.start(url.host, url.port) do |http|
       http.request(req)
     end
