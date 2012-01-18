@@ -20,7 +20,7 @@ class YouTubesController < ApplicationController
     url = URI.parse(base_url)
     video = params[:userfile].open
     
-    req = Net::HTTP::Post::Multipart.new base_url.gsub("http://uploads.gdata.youtube.com",""),"file" => UploadIO.new(jpg, video.content_type, video.original_filename), "token"=>@upload_info[:token]
+    req = Net::HTTP::Post::Multipart.new base_url.gsub("http://uploads.gdata.youtube.com",""),"file" => UploadIO.new(video, video.content_type, video.original_filename), "token"=>@upload_info[:token]
     res = Net::HTTP.start(url.host, url.port) do |http|
       http.request(req)
     end
