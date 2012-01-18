@@ -13,14 +13,15 @@ class VideosController < InheritedResources::Base
     base_url = @upload_info[:url]
     #ss = RestClient.post(base_url, :token=>@upload_info[:token], :file => File.new(Rails.root.to_s + "/public/jumps.mp4"), :content_type => 'video/mp4')
     
-    
-    url = URI.parse(base_url)
-    jpg = params[:file].open
-    req = Net::HTTP::Post::Multipart.new base_url.gsub("http://uploads.gdata.youtube.com",""),"file" => UploadIO.new(jpg, params[:file].content_type, params[:file].original_filename), "token"=>@upload_info[:token]
-    res = Net::HTTP.start(url.host, url.port) do |http|
-      http.request(req)
-    end
-    render :text=>res.body
+    client = YouTubeIt::Client.new(:username => YouTubeITConfig.username, :password =>  YouTubeITConfig.password, :dev_key => YouTubeITConfig.dev_key)
+    response = client.video_upload(params[:file].open, :title => "test",:description => "some description", :category => "People",:keywords => %w[cool blah test], :comment => "denied")
+    #url = URI.parse(base_url)
+    #jpg = params[:file].open
+    #req = Net::HTTP::Post::Multipart.new url.path,"file" => UploadIO.new(jpg, params[:file].content_type, params[:file].original_filename), "token"=>@upload_info[:token],"nexturl"=>save_video_new_video_url(:video_id => @video.id).to_s
+    #res , data = Net::HTTP.start(url.host, url.port) do |http|
+      #http.request(req)
+    #end
+    render :text=>"sdfds"
   end
   
   def test_new
