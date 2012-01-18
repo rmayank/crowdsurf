@@ -34,7 +34,7 @@
             <div>
             <% event.process_videos.each do |video| -%>
                <div style="float:left;width:170px;">
-                 <span> <%= video.start_time.strftime("%I:%M%p") %> <%= video.end_time.strftime(" to %I:%M%p") %></span>
+                 <span> <%= video.start_time.strftime("%I:%M:%S%P") %> <%= video.end_time.strftime(" to %I:%M:%S%P") %></span>
                  <span>
                  <%= raw yt_client.my_video(get_watch_id(video.video_link)).embed_html5(:width=>150,:height=>150) %>
                  </span>
