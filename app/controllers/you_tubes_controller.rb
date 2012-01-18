@@ -1,3 +1,9 @@
+require 'net/http'
+require 'net/https'
+require 'open-uri'
+require 'net/http/post/multipart'
+
+
 class YouTubesController < ApplicationController
 
   def index
