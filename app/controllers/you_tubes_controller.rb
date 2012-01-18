@@ -24,7 +24,7 @@ class YouTubesController < ApplicationController
     res = Net::HTTP.start(url.host, url.port) do |http|
       http.request(req)
     end
-    render :text=>res.body
+    redirect_to save_video_new_video_url(:video_id => @video.id)
   end
   
 end
