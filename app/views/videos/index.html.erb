@@ -1,3 +1,28 @@
+<script>
+function callPlayer(frame_id, func, args){
+    if(!frame_id) return;
+    if(frame_id.id) frame_id = frame_id.id;
+    else if(typeof jQuery != "undefined" && frame_id instanceof jQuery && frame_id.length) frame_id = frame_id.get(0).id;
+    if(!document.getElementById(frame_id)) return;
+    args = args || [];
+
+    /*Searches the document for the IFRAME with id=frame_id*/
+    var all_iframes = document.getElementsByTagName("iframe");
+    for(var i=0, len=all_iframes.length; i<len; i++){
+        if(all_iframes[i].id == frame_id || all_iframes[i].parentNode.id == frame_id){
+           /*The index of the IFRAME element equals the index of the iframe in
+             the frames object (<frame> . */
+           window.frames[i].postMessage(JSON.stringify({
+                "event": "command",
+                "func": func,
+                "args": args,
+                "id": frame_id
+            }), "*");
+        }
+    }
+}
+
+</script>
 <div class="block">
   <div class="secondary-navigation">
     <ul class="wat-cf">
@@ -7,7 +32,7 @@
     <h2 class="title"><%= t("web-app-theme.all", :default => "All")  %> Events</h2>
     <div class="inner">
       <table class="table">
-        <tr>             
+        <tr id="first_tr" onclick="callPlayer('frame_2', 'playVideo');">             
           <th class="first">ID</th>
                     <th>
             <%= "Event Name" %>
@@ -32,11 +57,24 @@
         <tr>
           <td colspan="4">
             <div>
-            <% event.process_videos.each do |video| -%>
+            <% first_video_start_time = event.process_videos[0].start_time rescue nil %>
+            <% event.process_videos.order(:start_time).each do |video| -%>
                <div style="float:left;width:170px;">
                  <span> <%= video.start_time.strftime("%I:%M:%S%P") %> <%= video.end_time.strftime(" to %I:%M:%S%P") %></span>
                  <span>
-                 <%= raw yt_client.my_video(get_watch_id(video.video_link)).embed_html5(:width=>150,:height=>150) %>
+                     <iframe width="150" height="150" id="frame_<%=event.id.to_s + video.id.to_s%>" src="http://www.youtube.com/embed/<%=get_watch_id(video.video_link).to_s%>?enablejsapi=1" frameborder="0" allowFullScreen=""></iframe>
+                     <% next_playing_time = video.start_time - first_video_start_time %>
+<script>
+  function play_video(frame_id){
+    callPlayer(frame_id, "playVideo");
+  }
+   $(document).ready(function() {
+    $("#frame_<%=event.id.to_s + video.id.to_s%>").load(function (){
+      setTimeout(function() {play_video("frame_<%=event.id.to_s + video.id.to_s%>");}, 5000 + <%=next_playing_time.to_i%>*1000 );
+   });
+
+  });
+</script>
                  </span>
                </div>
             <% end %>
