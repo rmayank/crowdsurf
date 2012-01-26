@@ -57,7 +57,7 @@ function callPlayer(frame_id, func, args){
         <tr>
           <td colspan="4">
             <div>
-            <% first_video_start_time = event.process_videos[0].start_time rescue nil %>
+            <% first_video_start_time = event.process_videos.order(:start_time)[0].start_time rescue nil %>
             <% event.process_videos.order(:start_time).each do |video| -%>
                <div style="float:left;width:170px;">
                  <span> <%= video.start_time.strftime("%I:%M:%S%P") %> <%= video.end_time.strftime(" to %I:%M:%S%P") %></span>
