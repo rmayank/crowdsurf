@@ -1,0 +1,27 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  event: 
+  zip: MyString
+  lng: 9.99
+  lat: 9.99
+  uri: MyString
+  displayName: MyString
+  street: MyString
+  website: MyString
+  phone: MyString
+  capacity: MyString
+  description: MyString
+
+two:
+  event: 
+  zip: MyString
+  lng: 9.99
+  lat: 9.99
+  uri: MyString
+  displayName: MyString
+  street: MyString
+  website: MyString
+  phone: MyString
+  capacity: MyString
+  description: MyString

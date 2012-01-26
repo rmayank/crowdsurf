@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  venue: 
+  uri: MyString
+  displayName: MyString
+  country: MyString
+
+two:
+  venue: 
+  uri: MyString
+  displayName: MyString
+  country: MyString

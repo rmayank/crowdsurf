@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  event: 
+  displayName: MyString
+  billingIndex: MyString
+  billing: MyString
+
+two:
+  event: 
+  displayName: MyString
+  billingIndex: MyString
+  billing: MyString

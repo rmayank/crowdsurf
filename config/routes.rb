@@ -20,7 +20,7 @@ Temp::Application.routes.draw do
   end
 
   match "videos/:id/add_comment", :to => "videos#add_comment"
-
+  match 'events' => 'Events#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

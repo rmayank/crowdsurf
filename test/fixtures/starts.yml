@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  event: 
+  time: 2012-01-23 19:49:57
+  date: 2012-01-23
+  datetime: 2012-01-23 19:49:57
+
+two:
+  event: 
+  time: 2012-01-23 19:49:57
+  date: 2012-01-23
+  datetime: 2012-01-23 19:49:57
