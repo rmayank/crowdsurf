@@ -18,7 +18,7 @@ class YouTubesController < ApplicationController
       #raw_video = RawVideo.new(:start_time=>params[:starttimeValue].gsub("-","").to_time, :end_time=>params[:endtimeValue].gsub("-","").to_time, :latitude=>params[:latitudeValue].to_f, :longitude=>params[:longitudeValue].to_f,:video_link=>response.player_url)
       #save_video = raw_video.save
       if event = ( Event.find(params[:eventId]) rescue nil)
-        event.process_videos.create(:start_time=>params[:starttimeValue].gsub("-","").to_time, :end_time=>params[:endtimeValue].gsub("-","").to_time,:video_link=>response.player_url)
+        event.process_videos.create(:start_time=>params[:starttimeValue].gsub("-","").to_time, :end_time=>params[:endtimeValue].gsub("-","").to_time, :latitude=>params[:latitudeValue].to_f, :longitude=>params[:longitudeValue].to_f,:video_link=>response.player_url)
         render :text=>"video uploaded successfully"
      else
        CrowdSurfLog.create(:my_loger=>params.to_s)
