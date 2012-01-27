@@ -21,7 +21,7 @@ class YouTubesController < ApplicationController
         # need to check that input lat/long is near around events lat/long 
         event.process_videos.create(:start_time=>params[:starttimeValue].gsub("-","").to_time, :end_time=>params[:endtimeValue].gsub("-","").to_time, :latitude=>params[:latitudeValue].to_f, :longitude=>params[:longitudeValue].to_f,:video_link=>response.player_url)
          my_str = Array.new
-        obj.instance_variables.each do |v|
+        response.instance_variables.each do |v|
             my_str << "#{v}: #{obj.instance_variable_get(v)}\n"
        end
         render :text=>my_str
